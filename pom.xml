@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.zepben.maven</groupId>
+        <artifactId>evolve-super-pom</artifactId>
+        <version>0.3.5</version>
+    </parent>
+
+    <groupId>com.zepben</groupId>
+    <artifactId>ewb-network-server</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Headless server for managing electricity networks</description>
+    <url>https://github.com/zepben/ewb-network-server</url>
+    <organization>
+        <name>Zeppelin Bend Pty Ltd.</name>
+        <url>https://zepben.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>GNU Affero General Public License v3.0</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Anthony Charlton</name>
+            <email>anthony.charlton@zepben.com</email>
+            <organization>Zeppelin Bend</organization>
+            <organizationUrl>https://zepben.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Glenn Carwardine</name>
+            <email>glenn.carwardine@zepben.com</email>
+            <organization>Zeppelin Bend</organization>
+            <organizationUrl>https://zepben.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Kurt Greaves</name>
+            <email>kurt.greaves@zepben.com</email>
+            <organization>Zeppelin Bend</organization>
+            <organizationUrl>https://zepben.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/zepben/ewb-network-server.git</connection>
+        <developerConnection>scm:git:ssh://github.com:zepben/ewb-network-server.git</developerConnection>
+        <url>http://github.com/zepben/ewb-network-server/</url>
+    </scm>
+
+    <properties>
+        <mainClass>com.zepben.ewbnetworkserver.Main</mainClass>
+        <jacoco.coverage>0.7</jacoco.coverage>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zepben</groupId>
+            <artifactId>annotations</artifactId>
+            <version>1.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zepben</groupId>
+            <artifactId>command-line-arguments</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zepben.ewb</groupId>
+            <artifactId>ewb-data-file-paths</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zepben</groupId>
+            <artifactId>ewb-network-routes</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zepben</groupId>
+            <artifactId>aws-utils</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zepben</groupId>
+            <artifactId>find-nearest-location</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fusesource.jansi</groupId>
+            <artifactId>jansi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zepben</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>1.1.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ginsberg</groupId>
+            <artifactId>junit5-system-exit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
