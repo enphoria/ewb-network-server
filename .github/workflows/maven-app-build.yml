@@ -1,11 +1,10 @@
-name: Build App
+name: Maven App Build
 
 on: 
   pull_request:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 
 jobs:

@@ -1,4 +1,4 @@
-name: Snapshot App Release 
+name: Maven App Snapshot
 
 on: workflow_dispatch
 
@@ -8,9 +8,6 @@ jobs:
     container: zepben/pipeline-java
     outputs:
       check_container_config: ${{ steps.check_container_config.outputs.files_exists }}
-    env:
-      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-      GPG_KEY_PASSWORD: ${{ secrets.GPG_KEY_PASSWORD }} 
     steps:
       - uses: actions/checkout@v2
 
@@ -27,7 +24,7 @@ jobs:
           version=$(xmlstarlet pyx pom.xml | grep -v ^A | xmlstarlet p2x | xmlstarlet sel -t -v "/project/version")
           artifact="${artifactId}-${version}.jar"
           echo "::set-output name=artifact-path::$(echo target/$artifact)"
-          mvn clean package -f pom.xml -P release -Dgpg.key.id=$GPG_KEY_ID -Dgpg.key.password=$GPG_KEY_PASSWORD
+          mvn clean package -f pom.xml
 
       - uses: actions/upload-artifact@master
         with:
@@ -56,11 +53,12 @@ jobs:
           name: build-artifact
           path: built-artifacts
 
-      - name: Create Energy Wokbench Server Docker image
+      - name: Create Docker image
         run: |
-          mv built-artifacts/*.jar built-artifacts/energy-workbench-server.jar
           apk add docker jq xmlstarlet
+          artifactId=$(xmlstarlet pyx pom.xml | grep -v ^A | xmlstarlet p2x | xmlstarlet sel -t -v "/project/artifactId")
           version=$(xmlstarlet pyx pom.xml | grep -v ^A | xmlstarlet p2x | xmlstarlet sel -t -v "/project/version")
+          mv built-artifacts/*.jar built-artifacts/${artifactId}.jar
           jq --arg VERSION $version '."post-processors"[0][0].tag = $VERSION' container.json > container.json.tmp
           mv container.json.tmp container.json
           mkdir /build
