@@ -93,6 +93,8 @@ public class Main {
                     if (event.failed())
                         dependencies.onFailure().accept(ProgramStatus.FAILED_TO_START);
                 });
+
+            ewbNetworkServer.startGrpcServer();
         } catch (Exception e) {
             logger.error("Failed to start network server: {}", e.getMessage(), e);
             return ProgramStatus.FAILED_TO_START;

@@ -20,6 +20,7 @@ package com.zepben.ewbnetworkserver;
 
 import com.zepben.testutils.junit.SystemLogExtension;
 import com.zepben.testutils.mockito.DefaultAnswer;
+import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -34,7 +35,7 @@ public class MainDependenciesTest {
 
     @Test
     public void coverage() {
-        MainDependencies dependencies = new MainDependencies(mock(CmdArgs.class, DefaultAnswer.of(String.class, "")));
+        MainDependencies dependencies = new MainDependencies(mock(CmdArgs.class, DefaultAnswer.of(String.class, "").and(ClientAuth.class, ClientAuth.NONE)));
         assertThat(dependencies.ewbNetworkServerVerticle(), notNullValue());
         assertThat(dependencies.onFailure(), notNullValue());
     }

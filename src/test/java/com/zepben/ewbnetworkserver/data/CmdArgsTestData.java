@@ -36,12 +36,16 @@ public class CmdArgsTestData {
             "-s3", "bucket name",
             "-o", "output.json",
             "-cors", ".*",
-            "-debug", "debug/file.ext");
+            "-debug", "debug/file.ext",
+            "-gp", "8081",
+            "-gt", "tls.crt", "tls.key",
+            "-ga", "REQUIRE", "trust.ca");
     }
 
     public static String[] minimumArgs() {
         return arrayOf("-p", "8080",
-            "-e", "ewb/root");
+            "-e", "ewb/root",
+            "-gp", "8081");
     }
 
 }

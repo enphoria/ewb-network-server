@@ -62,6 +62,7 @@ class MockEwbNetworkServerDependencies implements EwbNetworkServer.Dependencies 
 
     private final Consumer<ProgramStatus> onShutdown = mock(Consumer.class);
     private final int port = 80;
+    private final EwbGrpcServer ewbGrpcServer = mock(EwbGrpcServer.class);
     private final EwbDataFilePaths ewbDataFilePaths = mock(EwbDataFilePaths.class);
     private final EwbDataFilePathsHelper ewbDataFilePathsHelper = mock(EwbDataFilePathsHelper.class);
     private final LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
@@ -99,6 +100,11 @@ class MockEwbNetworkServerDependencies implements EwbNetworkServer.Dependencies 
     @Override
     public int port() {
         return port;
+    }
+
+    @Override
+    public EwbGrpcServer ewbGrpcServer() {
+        return ewbGrpcServer;
     }
 
     @Override

@@ -79,6 +79,7 @@ public class MainTest {
         verify(dependencies, times(1)).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, times(1)).load();
         verify(ewbNetworkServer, times(1)).startHttpServer();
+        verify(ewbNetworkServer, times(1)).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 
@@ -93,6 +94,7 @@ public class MainTest {
         verify(dependencies, never()).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, never()).load();
         verify(ewbNetworkServer, never()).startHttpServer();
+        verify(ewbNetworkServer, never()).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 
@@ -108,6 +110,7 @@ public class MainTest {
         verify(dependencies, never()).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, never()).load();
         verify(ewbNetworkServer, never()).startHttpServer();
+        verify(ewbNetworkServer, never()).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 
@@ -123,6 +126,7 @@ public class MainTest {
         verify(dependencies, never()).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, never()).load();
         verify(ewbNetworkServer, never()).startHttpServer();
+        verify(ewbNetworkServer, never()).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 
@@ -138,6 +142,7 @@ public class MainTest {
         verify(dependencies, never()).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, never()).load();
         verify(ewbNetworkServer, never()).startHttpServer();
+        verify(ewbNetworkServer, never()).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 
@@ -153,6 +158,7 @@ public class MainTest {
         verify(dependencies, times(1)).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, times(1)).load();
         verify(ewbNetworkServer, never()).startHttpServer();
+        verify(ewbNetworkServer, never()).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 
@@ -166,6 +172,7 @@ public class MainTest {
         verify(dependencies, times(1)).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, times(1)).load();
         verify(ewbNetworkServer, times(1)).startHttpServer();
+        verify(ewbNetworkServer, times(1)).startGrpcServer();
         verify(onFailure, times(1)).accept(FAILED_TO_START);
     }
 
@@ -181,6 +188,7 @@ public class MainTest {
         verify(dependencies, times(1)).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, times(1)).load();
         verify(ewbNetworkServer, never()).startHttpServer();
+        verify(ewbNetworkServer, never()).startGrpcServer();
         verify(onFailure, never()).accept(any());
     }
 

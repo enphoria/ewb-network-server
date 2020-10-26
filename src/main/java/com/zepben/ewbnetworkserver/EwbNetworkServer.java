@@ -77,6 +77,7 @@ class EwbNetworkServer {
     private final Router router;
     private final Consumer<ProgramStatus> onShutdown;
     private final int port;
+    private final EwbGrpcServer ewbGrpcServer;
     private final EwbDataFilePaths ewbDataFilePaths;
     private final EwbDataFilePathsHelper ewbDataFilePathsHelper;
     private final LocalDate currentDate;
@@ -99,6 +100,7 @@ class EwbNetworkServer {
         router = dependencies.router();
         onShutdown = dependencies.onShutdown();
         port = dependencies.port();
+        ewbGrpcServer = dependencies.ewbGrpcServer();
         ewbDataFilePaths = dependencies.ewbDataFilePaths();
         ewbDataFilePathsHelper = dependencies.ewbDataFilePathsHelper();
         currentDate = dependencies.currentDate();
@@ -301,6 +303,14 @@ class EwbNetworkServer {
         return array;
     }
 
+    public void startGrpcServer() {
+        logger.info("Starting gRPC API on port {}...", ewbGrpcServer.getPort());
+
+        ewbGrpcServer.start();
+
+        logger.info("gRPC API started on port {}.", ewbGrpcServer.getPort());
+    }
+
     @FunctionalInterface
     interface ResultsWriter {
 
@@ -317,6 +327,8 @@ class EwbNetworkServer {
         Consumer<ProgramStatus> onShutdown();
 
         int port();
+
+        EwbGrpcServer ewbGrpcServer();
 
         EwbDataFilePaths ewbDataFilePaths();
 

@@ -23,6 +23,7 @@ import com.zepben.awsutils.S3;
 import com.zepben.awsutils.S3Dependencies;
 import com.zepben.cimbend.database.sqlite.DatabaseReader;
 import com.zepben.ewb.filepaths.EwbDataFilePaths;
+import com.zepben.ewbnc.NetworkConsumerService;
 import com.zepben.ewbnetworkserver.patch.LoadManipulations;
 import com.zepben.ewbnetworkserver.patch.routes.LoadManipulationsToJson;
 import com.zepben.idcorrelator.IdCorrelator;
@@ -45,6 +46,7 @@ class EwbNetworkServerDependencies implements EwbNetworkServer.Dependencies {
     private final Router router = Router.router(vertx);
     private final Consumer<ProgramStatus> onShutdown;
     private final int port;
+    private final EwbGrpcServer ewbGrpcServer;
     private final EwbDataFilePaths ewbDataFilePaths;
     private final EwbDataFilePathsHelper ewbDataFilePathsHelper;
     private final LocalDate currentDate;
@@ -63,6 +65,12 @@ class EwbNetworkServerDependencies implements EwbNetworkServer.Dependencies {
     EwbNetworkServerDependencies(CmdArgs cmdArgs, Consumer<ProgramStatus> onShutdown, FileWriter fileWriter, Function<S3Dependencies, S3> s3Provider) {
         this.onShutdown = onShutdown;
         port = cmdArgs.port();
+        ewbGrpcServer = new EwbGrpcServer(cmdArgs.grpcPort(),
+            cmdArgs.grpcCertPath(),
+            cmdArgs.grpcKeyPath(),
+            cmdArgs.grpcClientAuth(),
+            cmdArgs.grpcTrustPath(),
+            new NetworkConsumerService(services.networkService()));
         ewbDataFilePaths = new EwbDataFilePaths(cmdArgs.ewbDataRoot());
         ewbDataFilePathsHelper = new EwbDataFilePathsHelper(ewbDataFilePaths);
         currentDate = cmdArgs.currentDate();
@@ -97,6 +105,11 @@ class EwbNetworkServerDependencies implements EwbNetworkServer.Dependencies {
     @Override
     public int port() {
         return port;
+    }
+
+    @Override
+    public EwbGrpcServer ewbGrpcServer() {
+        return ewbGrpcServer;
     }
 
     @Override

@@ -18,8 +18,10 @@
 
 package com.zepben.ewbnetworkserver;
 
+import com.google.common.base.Enums;
 import com.zepben.annotations.EverythingIsNonnullByDefault;
 import com.zepben.commandlinearguments.CmdArgsBase;
+import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -27,6 +29,9 @@ import org.apache.commons.cli.ParseException;
 import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @EverythingIsNonnullByDefault
 class CmdArgs extends CmdArgsBase {
@@ -42,9 +47,34 @@ class CmdArgs extends CmdArgsBase {
     @Nullable private String output = null;
     @Nullable private String cors = null;
     @Nullable private String routeDebugFile = null;
+    @Nullable private Integer grpcPort = null;
+    @Nullable private String grpcCertPath = null;
+    @Nullable private String grpcKeyPath = null;
+    @Nullable private ClientAuth grpcClientAuth = null;
+    @Nullable private String grpcTrustPath = null;
 
     int port() {
         return ensureOptionInitialised(port);
+    }
+
+    public Integer grpcPort() {
+        return ensureOptionInitialised(grpcPort);
+    }
+
+    public String grpcCertPath() {
+        return ensureOptionInitialised(grpcCertPath);
+    }
+
+    public String grpcKeyPath() {
+        return ensureOptionInitialised(grpcKeyPath);
+    }
+
+    public ClientAuth grpcClientAuth() {
+        return ensureOptionInitialised(grpcClientAuth);
+    }
+
+    public String grpcTrustPath() {
+        return ensureOptionInitialised(grpcTrustPath);
     }
 
     String ewbDataRoot() {
@@ -94,7 +124,7 @@ class CmdArgs extends CmdArgsBase {
             .longOpt("port")
             .hasArg()
             .argName("PORT")
-            .desc("the port number to listen on.")
+            .desc("the port number the REST API will listen on.")
             .build());
 
         options.addOption(Option
@@ -176,6 +206,33 @@ class CmdArgs extends CmdArgsBase {
             .argName("FILE")
             .desc("Enable route debugging. Request bodies will be saved to the specified file.. (DEFAULT: none).")
             .build());
+
+        options.addOption(Option
+            .builder("gp")
+            .longOpt("grpc-port")
+            .hasArg()
+            .argName("PORT")
+            .desc("The port number for the gRPC server.")
+            .build());
+
+        options.addOption(Option
+            .builder("gt")
+            .longOpt("grpc-tls")
+            .argName("CERT_PATH> <KEY_PATH")
+            .numberOfArgs(2)
+            .desc("CERT_PATH specifies the path to the certificate to use, and KEY_PATH specifies the path to the " +
+                "private key for the certificate.")
+            .build());
+
+        options.addOption(Option
+            .builder("ga")
+            .longOpt("grpc-auth")
+            .argName("CLIENT_AUTH> <TRUST_PATH")
+            .numberOfArgs(2)
+            .desc("CLIENT_AUTH controls the client authentication requirements {OPTIONAL|REQUIRE]. TRUST_PATH " +
+                "specifies the path to the trusted certificate for verifying the remote endpoint's certificate.")
+            .build());
+
     }
 
     @Override
@@ -191,6 +248,31 @@ class CmdArgs extends CmdArgsBase {
         output = getOptionalStringArg("output").orElse("ewb-network-server-status.json");
         cors = getOptionalStringArg("cors").orElse("");
         routeDebugFile = getOptionalStringArg("debug-routing").orElse("");
+        grpcPort = getRequiredIntArg("grpc-port", 1, 65535);
+
+        if (Objects.equals(grpcPort, port))
+            throw new ParseException("grpc-port cannot be the same number as port.");
+
+        Optional<List<String>> tlsArgs = getOptionalStringArgList("grpc-tls");
+        if (tlsArgs.isPresent()) {
+            grpcCertPath = tlsArgs.get().get(0);
+            grpcKeyPath = tlsArgs.get().get(1);
+        } else {
+            grpcCertPath = "";
+            grpcKeyPath = "";
+        }
+
+        Optional<List<String>> authArgs = getOptionalStringArgList("grpc-auth");
+        if (authArgs.isPresent()) {
+            grpcClientAuth = Enums.getIfPresent(ClientAuth.class, authArgs.get().get(0)).orNull();
+            if (grpcClientAuth == null)
+                throw new ParseException("Unknown CLIENT_AUTH value '" + authArgs.get().get(0) + "', expected OPTIONAL or REQUIRE.");
+
+            grpcTrustPath = authArgs.get().get(1);
+        } else {
+            grpcClientAuth = ClientAuth.NONE;
+            grpcTrustPath = "";
+        }
     }
 
 }

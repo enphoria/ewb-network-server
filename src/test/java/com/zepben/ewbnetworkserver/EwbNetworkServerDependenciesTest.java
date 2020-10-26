@@ -21,6 +21,7 @@ package com.zepben.ewbnetworkserver;
 import com.zepben.awsutils.S3;
 import com.zepben.testutils.junit.SystemLogExtension;
 import com.zepben.testutils.mockito.DefaultAnswer;
+import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import io.vertx.core.json.JsonObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -81,11 +82,12 @@ public class EwbNetworkServerDependenciesTest {
         cmdArgs = mock(CmdArgs.class,
             DefaultAnswer
                 .of(String.class, "")
-                .and(LocalDate.class, LocalDate.now(ZoneId.systemDefault())));
-
+                .and(LocalDate.class, LocalDate.now(ZoneId.systemDefault()))
+                .and(ClientAuth.class, ClientAuth.NONE));
         doReturn(s3Bucket).when(cmdArgs).s3Bucket();
 
-        return new EwbNetworkServerDependencies(cmdArgs, s -> {}, callbacks::saveFile, deps -> s3);
+        return new EwbNetworkServerDependencies(cmdArgs, s -> {
+        }, callbacks::saveFile, deps -> s3);
     }
 
     private static class Callbacks {

@@ -20,6 +20,7 @@ package com.zepben.ewbnetworkserver;
 
 import com.zepben.testutils.exception.ExpectException;
 import com.zepben.testutils.junit.SystemLogExtension;
+import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -56,6 +57,11 @@ public class CmdArgsTest {
         assertThat(cmdArgs.output(), equalTo("output.json"));
         assertThat(cmdArgs.cors(), equalTo(".*"));
         assertThat(cmdArgs.routeDebugFile(), equalTo("debug/file.ext"));
+        assertThat(cmdArgs.grpcPort(), equalTo(8081));
+        assertThat(cmdArgs.grpcCertPath(), equalTo("tls.crt"));
+        assertThat(cmdArgs.grpcKeyPath(), equalTo("tls.key"));
+        assertThat(cmdArgs.grpcClientAuth(), equalTo(ClientAuth.REQUIRE));
+        assertThat(cmdArgs.grpcTrustPath(), equalTo("trust.ca"));
     }
 
     @Test
@@ -71,6 +77,10 @@ public class CmdArgsTest {
         assertThat(cmdArgs.output(), equalTo("ewb-network-server-status.json"));
         assertThat(cmdArgs.cors(), equalTo(""));
         assertThat(cmdArgs.routeDebugFile(), equalTo(""));
+        assertThat(cmdArgs.grpcCertPath(), equalTo(""));
+        assertThat(cmdArgs.grpcKeyPath(), equalTo(""));
+        assertThat(cmdArgs.grpcClientAuth(), equalTo(ClientAuth.NONE));
+        assertThat(cmdArgs.grpcTrustPath(), equalTo(""));
     }
 
     @Test
@@ -83,11 +93,19 @@ public class CmdArgsTest {
             .toThrow(ParseException.class)
             .withMessage("Missing required option: ewb-data-root.");
 
+        expect(() -> cmdArgs.parse(arrayOf("-p", "80", "-e", "ewb/root")))
+            .toThrow(ParseException.class)
+            .withMessage("Missing required option: grpc-port.");
+
         validateOption("-p", "0", "Integer 0 for argument port is out of range. Expected value in range 1..65535.");
         validateOption("-p", "65536", "Integer 65536 for argument port is out of range. Expected value in range 1..65535.");
         validateOption("-p", "abc", "Invalid integer 'abc' for argument port.");
         validateOption("-c", "abc", "Invalid date 'abc' for argument current-date.");
         validateOption("-d", "abc", "Invalid integer 'abc' for argument days-to-search.");
+        validateOption("-gp", "0", "Integer 0 for argument grpc-port is out of range. Expected value in range 1..65535.");
+        validateOption("-gp", "65536", "Integer 65536 for argument grpc-port is out of range. Expected value in range 1..65535.");
+        validateOption("-gp", "abc", "Invalid integer 'abc' for argument grpc-port.");
+        validateOption("-gp", "80", "grpc-port cannot be the same number as port.");
     }
 
     @Test
@@ -102,10 +120,15 @@ public class CmdArgsTest {
         validateIllegalOptionUsage(cmdArgs::output);
         validateIllegalOptionUsage(cmdArgs::cors);
         validateIllegalOptionUsage(cmdArgs::routeDebugFile);
+        validateIllegalOptionUsage(cmdArgs::grpcPort);
+        validateIllegalOptionUsage(cmdArgs::grpcCertPath);
+        validateIllegalOptionUsage(cmdArgs::grpcKeyPath);
+        validateIllegalOptionUsage(cmdArgs::grpcClientAuth);
+        validateIllegalOptionUsage(cmdArgs::grpcTrustPath);
     }
 
     private void validateOption(String option, String value, String expectedMessage) {
-        expect(() -> cmdArgs.parse(arrayOf(option, value, "-p", "80", "-e", "path")))
+        expect(() -> cmdArgs.parse(arrayOf(option, value, "-p", "80", "-e", "path", "-gp", "81")))
             .toThrow(ParseException.class)
             .withMessage(expectedMessage);
     }

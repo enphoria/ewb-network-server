@@ -18,10 +18,6 @@
 
 package com.zepben.ewbnetworkserver;
 
-/*
- * Copyright Zeppelin Bend Pty Ltd (Zepben). The use of this file and its contents requires explicit permission from Zepben.
- */
-
 import com.zepben.annotations.EverythingIsNonnullByDefault;
 import com.zepben.cimbend.customer.CustomerService;
 import com.zepben.cimbend.diagram.DiagramService;
