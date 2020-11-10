@@ -2,10 +2,30 @@
 
 | Version | Date |
 | --- | :--- |
+|[2.1.0](#v210)| `TBD` |
 | [2.0.0](#v200) | `10 November 2020` |
 | [1.2.0](#v120) | `8 November 2019` |
 | [1.1.0](#v110) | `21 June 2019` |
 | 1.0.0 | `7 March 2019` |
+
+---
+
+### v2.1.0
+
+##### Breaking Changes
+* None.
+
+##### New Features
+* None.
+
+##### Enhancements
+* None.
+
+##### Fixes
+* None.
+
+##### Notes
+* None.
 
 ---
 
