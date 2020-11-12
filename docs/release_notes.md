@@ -22,7 +22,7 @@
 * None.
 
 ##### Fixes
-* None.
+* Transformer voltage is extracted from the first of the transformer's ends.
 
 ##### Notes
 * None.
