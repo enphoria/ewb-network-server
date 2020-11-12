@@ -2,10 +2,21 @@
 
 | Version | Date |
 | --- | :--- |
+| [2.0.1](#v201)| `TBD` |
 | [2.0.0](#v200) | `10 November 2020` |
 | [1.2.0](#v120) | `8 November 2019` |
 | [1.1.0](#v110) | `21 June 2019` |
 | 1.0.0 | `7 March 2019` |
+
+---
+
+### v2.0.1
+
+##### Fixes
+* Transformer voltage is extracted from the first of the transformer's ends.
+
+##### Notes
+* None.
 
 ---
 
