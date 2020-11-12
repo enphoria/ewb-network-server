@@ -11,7 +11,7 @@
 
     <groupId>com.zepben</groupId>
     <artifactId>ewb-network-server</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Headless server for managing electricity networks</description>
     <url>https://github.com/zepben/ewb-network-server</url>
