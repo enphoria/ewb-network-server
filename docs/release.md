@@ -16,7 +16,8 @@
 * None.
 
 ##### New Features
-* None.
+* Added a new route for retrieving metadata about the network - `/ewb/network/api/v1/metadata`.
+  See the API documentation for details.
 
 ##### Enhancements
 * None.

@@ -25,6 +25,7 @@ import com.zepben.cimbend.database.sqlite.tables.TableVersion;
 import com.zepben.ewb.filepaths.EwbDataFilePaths;
 import com.zepben.ewbnetworkroutes.config.GeoViewConfig;
 import com.zepben.ewbnetworkroutes.diagram.geoview.GeoviewRouteGroup;
+import com.zepben.ewbnetworkroutes.network.ApplicationInfo;
 import com.zepben.ewbnetworkroutes.network.ItemMatcher;
 import com.zepben.ewbnetworkroutes.network.NetworkRouteGroup;
 import com.zepben.ewbnetworkroutes.network.graphics.NetworkGraphicsRouteGroup;
@@ -185,8 +186,8 @@ class EwbNetworkServer {
         logger.info("Loading network from '{}'...", networkDbFile);
 
         DatabaseReader database = networkDatabaseProvider.apply(networkDbFile);
-        if (database.load(services.networkService(), services.diagramService(), services.customerService())) {
-            logger.info("Network loaded [v{}].", new TableVersion().SUPPORTED_VERSION);
+        if (database.load(services.metadataCollection, services.networkService(), services.diagramService(), services.customerService())) {
+            logger.info("Network loaded [v{}].", new TableVersion().getSUPPORTED_VERSION());
             return true;
         } else {
             String msg = "Failed to load network model.";
@@ -262,8 +263,11 @@ class EwbNetworkServer {
         TranslationHelper translationHelper = new TranslationHelper(idTranslator);
         ItemMatcher itemMatcher = new ItemMatcher(services.networkService(), services.diagramService(), translationHelper);
 
+        VersionInfo versionInfo = new VersionInfo();
+        ApplicationInfo applicationInfo = new ApplicationInfo(versionInfo.getTitle(), versionInfo.getVersion());
+
         routeRegister
-            .add(NetworkRouteGroup.api(services.networkService(), services.diagramService(), services.customerService(), idTranslator, idCorrelator, itemMatcher))
+            .add(NetworkRouteGroup.api(applicationInfo, services.metadataCollection, services.networkService(), services.diagramService(), services.customerService(), idTranslator, idCorrelator, itemMatcher))
             .add(NetworkTraceRouteGroup.api(services.networkService(), services.diagramService(), services.customerService(), idTranslator))
             .add(NetworkGraphicsRouteGroup.api(services.networkService(), services.diagramService(), services.customerService(), idTranslator, geoViewConfig))
             .add(GeoviewRouteGroup.api(idTranslator, geoViewConfig))

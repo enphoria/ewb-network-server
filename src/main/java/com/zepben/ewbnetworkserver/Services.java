@@ -19,6 +19,7 @@
 package com.zepben.ewbnetworkserver;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
+import com.zepben.cimbend.common.meta.MetadataCollection;
 import com.zepben.cimbend.customer.CustomerService;
 import com.zepben.cimbend.diagram.DiagramService;
 import com.zepben.cimbend.measurement.MeasurementService;
@@ -27,6 +28,7 @@ import com.zepben.cimbend.network.NetworkService;
 @EverythingIsNonnullByDefault
 public class Services {
 
+    public final MetadataCollection metadataCollection = new MetadataCollection();
     private final NetworkService networkService = new NetworkService();
     private final DiagramService diagramService = new DiagramService();
     private final CustomerService customerService = new CustomerService();

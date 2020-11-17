@@ -341,7 +341,7 @@ public class PatchProcessorTest {
 
         Services services = new Services();
         DatabaseReader databaseReader = new DatabaseReader("C:\\Working\\ewb\\data\\powercor\\current-9001\\2020-09-07\\2020-09-07-network-model.sqlite");
-        databaseReader.load(services.networkService(), services.diagramService(), services.customerService());
+        databaseReader.load(services.metadataCollection, services.networkService(), services.diagramService(), services.customerService());
 
         PatchProcessor patchProcessor = createPatchProcessor(services, new String(Files.readAllBytes(Paths.get("C:\\Working\\pcor\\nb\\options\\options.json")), UTF_8));
 
@@ -430,7 +430,7 @@ public class PatchProcessorTest {
     private void validateConnections(Services services, String assetId, String... expectedConnectedAssetIds) {
         List<String> connectedAssetIds = NetworkService.connectedEquipment(services.networkService().get(ConductingEquipment.class, assetId))
             .stream()
-            .map(ConnectivityResult::to)
+            .map(ConnectivityResult::getTo)
             .map(IdentifiedObject::getMRID)
             .collect(Collectors.toList());
 

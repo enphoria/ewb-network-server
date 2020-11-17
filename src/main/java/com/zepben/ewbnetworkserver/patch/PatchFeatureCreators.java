@@ -133,7 +133,8 @@ public class PatchFeatureCreators {
     }
 
     private <T extends ConductingEquipment> T populate(T it, GeoJson geoJson, String voltageKey, Map<String, PhaseCode> assetPhases, PatchResult patchResult, boolean logDefaultNormalState) throws JsonUtils.ParsingException {
-        boolean isNormallyOpen = isNormallyOpenFromNormalState(geoJson, onInvalidValue(patchResult), logDefaultNormalState ? logOnDefaultValue(patchResult) : ignoreOnDefaultValue());
+        boolean isNormallyOpen = isNormallyOpenFromNormalState(geoJson, onInvalidValue(patchResult), logDefaultNormalState ? logOnDefaultValue(patchResult) : (geo, property, defaultValue) -> {
+        });
 
         it.setName(geoJson.getStringProperty(DESCRIPTION, it.getMRID(), logOnDefaultValue(patchResult)));
         it.setLocation(createLocation(services, it.getMRID() + "-loc", Collections.singletonList(geoJson.geometry().coordinate())));
@@ -235,10 +236,6 @@ public class PatchFeatureCreators {
             loadQuantityString = loadQuantityString.substring(0, loadQuantityString.length() - 3).trim();
 
         return Double.parseDouble(loadQuantityString);
-    }
-
-    private GeoJson.DefaultValueHandler ignoreOnDefaultValue() {
-        return (geoJson, property, defaultValue) -> {};
     }
 
     private GeoJson.DefaultValueHandler logOnDefaultValue(PatchResult patchResult) {

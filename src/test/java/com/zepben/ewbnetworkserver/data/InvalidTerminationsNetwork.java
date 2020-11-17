@@ -48,8 +48,8 @@ public class InvalidTerminationsNetwork {
         Services services = new Services();
         NetworkService network = services.networkService();
 
-        Junction j1 = createJunction(network, "10000001", "j1", 2, PhaseCode.ABC, locationOf(network, "10000001-loc", LNG_LAT_1_1));
-        Junction j2 = createJunction(network, "10000002", "j2", 2, PhaseCode.ABC, locationOf(network, "10000002-loc", LNG_LAT_2_1));
+        createJunction(network, "10000001", "j1", 2, PhaseCode.ABC, locationOf(network, "10000001-loc", LNG_LAT_1_1));
+        createJunction(network, "10000002", "j2", 2, PhaseCode.ABC, locationOf(network, "10000002-loc", LNG_LAT_2_1));
 
         return services;
     }

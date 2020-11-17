@@ -360,7 +360,8 @@ public class PatchTerminationProcessor {
     private void applyFeedersAndPhases(List<Terminal> terminals, PatchResult patchResult) {
         terminals
             .stream()
-            .flatMap(terminal -> NetworkService.connectedTerminals(terminal).stream().map(ConnectivityResult::to))
+            .flatMap(terminal -> NetworkService.connectedTerminals(terminal).stream().map(ConnectivityResult::getTo))
+            .filter(Objects::nonNull)
             .distinct()
             .forEach(asset -> applyFeedersAndPhases(asset, patchResult));
     }

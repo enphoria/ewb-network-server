@@ -64,7 +64,7 @@ public class EwbNetworkServerTest {
     @RegisterExtension
     public SystemLogExtension systemOutRule = SystemLogExtension.SYSTEM_OUT.captureLog().muteOnSuccess();
 
-    private final int NUM_EXPECTED_NETWORK_ROUTES = 26;
+    private final int NUM_EXPECTED_NETWORK_ROUTES = 27;
     private final int NUM_EXPECTED_PATCH_ROUTES = 1;
     private final int NUM_EXPECTED_ROUTES = NUM_EXPECTED_NETWORK_ROUTES + NUM_EXPECTED_PATCH_ROUTES;
     private final int NUM_CORS_ROUTES = 1;
@@ -336,7 +336,7 @@ public class EwbNetworkServerTest {
             .setValidIdCorrelatorPath(idCorrelatorPath);
 
         doReturn(date).when(ewbDataFilePathsHelper).findClosestDateWithDbs(any(), anyInt());
-        doReturn(networkStatus).when(databaseReader).load(any(), any(), any());
+        doReturn(networkStatus).when(databaseReader).load(any(), any(), any(), any());
         if (!applyPatchesStatus)
             doReturn(null).when(patchProcessor).applyPatches();
         if (!saveResultsStatus)
@@ -361,7 +361,7 @@ public class EwbNetworkServerTest {
 
         verify(ewbDataFilePaths, times(expectedLoadCalls)).networkModel(validDate);
         verify(networkDatabaseProvider, times(expectedLoadCalls)).apply(networkDatabasePath);
-        verify(databaseReader, times(expectedLoadCalls)).load(any(), any(), any());
+        verify(databaseReader, times(expectedLoadCalls)).load(any(), any(), any(), any());
 
         verify(patchProcessor, times(expectedPatchesCalls)).applyPatches();
 

@@ -549,7 +549,7 @@ public class PatchProcessor {
         Set<Terminal> connectedFeedTerminals = new HashSet<>();
         conductor.getTerminals().forEach(terminal -> NetworkService.connectedTerminals(terminal)
             .stream()
-            .map(ConnectivityResult::toTerminal)
+            .map(ConnectivityResult::getToTerminal)
             .filter(connectedTerminal -> terminal.getPhases().singlePhases().stream()
                 .map(phase -> phaseSelector.status(connectedTerminal, phase))
                 .anyMatch(phaseStatus -> phaseStatus.direction().has(PhaseDirection.OUT)))

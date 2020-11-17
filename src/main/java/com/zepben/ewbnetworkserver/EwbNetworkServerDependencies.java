@@ -51,8 +51,6 @@ class EwbNetworkServerDependencies implements EwbNetworkServer.Dependencies {
     private final EwbDataFilePathsHelper ewbDataFilePathsHelper;
     private final LocalDate currentDate;
     private final int daysToSearch;
-    private final Function<Path, DatabaseReader> networkDatabaseProvider = path -> new DatabaseReader(path.toString());
-    private final Function<Path, IdCorrelatorReader> idCorrelatorReaderProvider = path -> new IdCorrelatorJSONReaderWriter(path, false);
     private final String cors;
     private final Services services = new Services();
     private final LoadManipulations loadManipulations = new LoadManipulations();
@@ -134,12 +132,12 @@ class EwbNetworkServerDependencies implements EwbNetworkServer.Dependencies {
 
     @Override
     public Function<Path, DatabaseReader> networkDatabaseProvider() {
-        return networkDatabaseProvider;
+        return path -> new DatabaseReader(path.toString());
     }
 
     @Override
     public Function<Path, IdCorrelatorReader> idCorrelatorReaderProvider() {
-        return idCorrelatorReaderProvider;
+        return path -> new IdCorrelatorJSONReaderWriter(path, false);
     }
 
     @Override

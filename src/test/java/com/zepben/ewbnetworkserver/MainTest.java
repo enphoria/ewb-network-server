@@ -47,9 +47,6 @@ public class MainTest {
     private final EwbNetworkServer ewbNetworkServer = dependencies.ewbNetworkServerVerticle();
     private final Consumer<ProgramStatus> onFailure = dependencies.onFailure();
 
-    private final Main.MainDependencyProvider dependenciesProvider = cmdArgs -> dependencies;
-    private final Runnable nullLogger = () -> {};
-
     @BeforeEach
     public void setUp() {
         clearInvocations(dependencies);
@@ -71,7 +68,7 @@ public class MainTest {
         doReturn(true).when(ewbNetworkServer).load();
         doReturn(Future.succeededFuture()).when(ewbNetworkServer).startHttpServer();
 
-        assertThat(Main.run(minimumArgs(), dependenciesProvider, nullLogger), IsEqual.equalTo(ProgramStatus.OK));
+        assertThat(run(minimumArgs()), IsEqual.equalTo(ProgramStatus.OK));
 
         String console = systemOutRule.getLog();
         assertThat(console, equalTo(""));
@@ -83,9 +80,14 @@ public class MainTest {
         verify(onFailure, never()).accept(any());
     }
 
+    public ProgramStatus run(String[] cmdArgs) {
+        return Main.run(cmdArgs, args -> dependencies, () -> {
+        });
+    }
+
     @Test
     public void showsHelpWhenAsked() {
-        assertThat(Main.run(arrayOf("-h"), dependenciesProvider, nullLogger), IsEqual.equalTo(ProgramStatus.SHOW_HELP));
+        assertThat(run(arrayOf("-h")), IsEqual.equalTo(ProgramStatus.SHOW_HELP));
 
         String console = systemOutRule.getLog();
         assertThat(console, containsString("usage: ewb-network-server"));
@@ -100,7 +102,7 @@ public class MainTest {
 
     @Test
     public void showsHelpWithUnknownCommandLineOptions() {
-        assertThat(Main.run(arrayOf("-q"), dependenciesProvider, nullLogger), equalTo(ProgramStatus.INVALID_COMMAND_LINE));
+        assertThat(run(arrayOf("-q")), equalTo(ProgramStatus.INVALID_COMMAND_LINE));
 
         String console = systemOutRule.getLog();
         assertThat(console, containsString("usage: ewb-network-server"));
@@ -116,7 +118,7 @@ public class MainTest {
 
     @Test
     public void showsHelpWithMissingCommandLineOptions() {
-        assertThat(Main.run(arrayOf(), dependenciesProvider, nullLogger), equalTo(ProgramStatus.INVALID_COMMAND_LINE));
+        assertThat(run(arrayOf()), equalTo(ProgramStatus.INVALID_COMMAND_LINE));
 
         String console = systemOutRule.getLog();
         assertThat(console, containsString("usage: ewb-network-server"));
@@ -132,7 +134,7 @@ public class MainTest {
 
     @Test
     public void showsHelpWithInvalidCommandLineOptions() {
-        assertThat(Main.run(arrayOf("-p", "80", "-e", "path", "-d", "abc"), dependenciesProvider, nullLogger), equalTo(ProgramStatus.INVALID_COMMAND_LINE));
+        assertThat(run(arrayOf("-p", "80", "-e", "path", "-d", "abc")), equalTo(ProgramStatus.INVALID_COMMAND_LINE));
 
         String console = systemOutRule.getLog();
         assertThat(console, containsString("usage: ewb-network-server"));
@@ -150,7 +152,7 @@ public class MainTest {
     public void handlesFailuresInTheServerLoad() {
         doReturn(false).when(ewbNetworkServer).load();
 
-        assertThat(Main.run(validArgs(), dependenciesProvider, nullLogger), equalTo(FAILED_TO_START));
+        assertThat(run(validArgs()), equalTo(FAILED_TO_START));
 
         String console = systemOutRule.getLog();
         assertThat(console, isEmptyString());
@@ -167,7 +169,7 @@ public class MainTest {
         doReturn(true).when(ewbNetworkServer).load();
         doReturn(Future.failedFuture("test failure")).when(ewbNetworkServer).startHttpServer();
 
-        assertThat(Main.run(validArgs(), dependenciesProvider, nullLogger), equalTo(ProgramStatus.OK));
+        assertThat(run(validArgs()), equalTo(ProgramStatus.OK));
 
         verify(dependencies, times(1)).ewbNetworkServerVerticle();
         verify(ewbNetworkServer, times(1)).load();
@@ -180,7 +182,7 @@ public class MainTest {
     public void handlesExceptionsInTheServerInitialisation() {
         doThrow(new RuntimeException("Test error")).when(ewbNetworkServer).load();
 
-        assertThat(Main.run(validArgs(), dependenciesProvider, nullLogger), equalTo(FAILED_TO_START));
+        assertThat(run(validArgs()), equalTo(FAILED_TO_START));
 
         String console = systemOutRule.getLog();
         assertThat(console, containsString("Test error"));

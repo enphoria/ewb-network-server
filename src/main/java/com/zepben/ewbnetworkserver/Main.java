@@ -58,11 +58,8 @@ public class Main {
     private static Logger logger = LoggerFactory.getLogger("ewb-network-server");
 
     static void logAppInfo() {
-        String msg = String.format("# %s v%s #",
-            Main.class.getPackage().getImplementationTitle(),
-            Main.class.getPackage().getImplementationVersion());
-
-        logger.info(msg);
+        VersionInfo versionInfo = new VersionInfo();
+        logger.info("# {} v{} #", versionInfo.getTitle(), versionInfo.getVersion());
     }
 
     static ProgramStatus run(String[] args, MainDependencyProvider dependencyProvider, Runnable logAppInfo) {

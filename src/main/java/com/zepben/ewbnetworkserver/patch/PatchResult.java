@@ -18,6 +18,7 @@
 
 package com.zepben.ewbnetworkserver.patch;
 
+import com.google.errorprone.annotations.FormatMethod;
 import com.zepben.annotations.EverythingIsNonnullByDefault;
 import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
 import com.zepben.cimbend.cim.iec61970.base.core.IdentifiedObject;
@@ -71,11 +72,13 @@ class PatchResult {
         return this;
     }
 
+    @FormatMethod
     public PatchResult addError(String error, Object... args) {
         errors.add(String.format(error, args));
         return this;
     }
 
+    @FormatMethod
     public PatchResult addWarning(String warning, Object... args) {
         warnings.add(String.format(warning, args));
         return this;
