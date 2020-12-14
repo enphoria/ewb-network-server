@@ -19,10 +19,10 @@
 package com.zepben.ewbnetworkserver.data;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
-import com.zepben.cimbend.cim.iec61970.base.core.PhaseCode;
-import com.zepben.cimbend.cim.iec61970.base.wires.Junction;
-import com.zepben.cimbend.network.NetworkService;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61970.base.core.PhaseCode;
+import com.zepben.evolve.cim.iec61970.base.wires.Junction;
+import com.zepben.evolve.services.network.NetworkService;
 import com.zepben.ewbnetworkserver.Services;
 import io.vertx.core.json.JsonObject;
 

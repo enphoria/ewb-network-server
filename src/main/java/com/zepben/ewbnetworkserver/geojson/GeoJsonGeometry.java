@@ -19,7 +19,7 @@
 package com.zepben.ewbnetworkserver.geojson;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
 import com.zepben.vertxutils.json.JsonUtils;
 import com.zepben.vertxutils.json.JsonValueExtractors;
 import io.vertx.core.json.JsonArray;

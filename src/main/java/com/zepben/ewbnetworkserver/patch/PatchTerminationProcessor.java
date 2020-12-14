@@ -19,17 +19,17 @@
 package com.zepben.ewbnetworkserver.patch;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.Location;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
-import com.zepben.cimbend.cim.iec61970.base.auxiliaryequipment.AuxiliaryEquipment;
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
-import com.zepben.cimbend.cim.iec61970.base.core.IdentifiedObject;
-import com.zepben.cimbend.cim.iec61970.base.core.PhaseCode;
-import com.zepben.cimbend.cim.iec61970.base.core.Terminal;
-import com.zepben.cimbend.cim.iec61970.base.wires.*;
-import com.zepben.cimbend.network.NetworkService;
-import com.zepben.cimbend.network.tracing.ConnectivityResult;
-import com.zepben.cimbend.network.tracing.Tracing;
+import com.zepben.evolve.cim.iec61968.common.Location;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61970.base.auxiliaryequipment.AuxiliaryEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.IdentifiedObject;
+import com.zepben.evolve.cim.iec61970.base.core.PhaseCode;
+import com.zepben.evolve.cim.iec61970.base.core.Terminal;
+import com.zepben.evolve.cim.iec61970.base.wires.*;
+import com.zepben.evolve.services.network.NetworkService;
+import com.zepben.evolve.services.network.tracing.ConnectivityResult;
+import com.zepben.evolve.services.network.tracing.Tracing;
 import com.zepben.ewbnetworkserver.Services;
 import com.zepben.ewbnetworkserver.geojson.GeoJson;
 import com.zepben.vertxutils.json.JsonUtils;
@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.zepben.cimbend.common.extensions.IdentifiedObjectExtensionsKt.typeNameAndMRID;
+import static com.zepben.evolve.services.common.extensions.IdentifiedObjectExtensionsKt.typeNameAndMRID;
 import static com.zepben.ewbnetworkserver.ObjectCreators.createTerminal;
 import static com.zepben.ewbnetworkserver.patch.PatchProperties.CONNECTED_ASSETS;
 import static com.zepben.ewbnetworkserver.patch.PatchProperties.CONNECTED_ASSET_ID;

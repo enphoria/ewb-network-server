@@ -18,8 +18,8 @@
 
 package com.zepben.ewbnetworkserver;
 
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
-import com.zepben.cimbend.database.sqlite.DatabaseReader;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.database.sqlite.DatabaseReader;
 import com.zepben.ewb.filepaths.EwbDataFilePaths;
 import com.zepben.ewbnetworkserver.patch.PatchResult;
 import com.zepben.idcorrelator.io.FailedCorrelationInfo;
@@ -155,7 +155,6 @@ public class EwbNetworkServerTest {
     }
 
     @Test
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void configuresOptionalRoutesIfRequested() throws Exception {
         configureData(validDate, true, true, true, true);
         doReturn(true).when(routeDebug).isDebugging();

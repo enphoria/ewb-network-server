@@ -20,8 +20,8 @@ package com.zepben.ewbnetworkserver.patch;
 
 import com.google.errorprone.annotations.FormatMethod;
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
-import com.zepben.cimbend.cim.iec61970.base.core.IdentifiedObject;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.IdentifiedObject;
 
 import java.util.*;
 

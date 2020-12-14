@@ -19,8 +19,8 @@
 package com.zepben.ewbnetworkserver.patch;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61970.base.auxiliaryequipment.AuxiliaryEquipment;
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.cim.iec61970.base.auxiliaryequipment.AuxiliaryEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
 
 import java.util.List;
 

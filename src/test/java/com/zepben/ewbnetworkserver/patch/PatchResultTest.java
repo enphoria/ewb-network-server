@@ -18,7 +18,7 @@
 
 package com.zepben.ewbnetworkserver.patch;
 
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
 import com.zepben.ewbnetworkserver.TestObjectCreators;
 import com.zepben.testutils.junit.SystemLogExtension;
 import org.junit.jupiter.api.Test;

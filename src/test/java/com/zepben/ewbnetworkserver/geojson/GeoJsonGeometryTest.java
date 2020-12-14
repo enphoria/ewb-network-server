@@ -18,7 +18,7 @@
 
 package com.zepben.ewbnetworkserver.geojson;
 
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
 import com.zepben.testutils.junit.SystemLogExtension;
 import com.zepben.vertxutils.json.JsonUtils;
 import io.vertx.core.json.JsonArray;

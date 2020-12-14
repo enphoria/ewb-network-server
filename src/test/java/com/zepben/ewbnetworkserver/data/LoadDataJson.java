@@ -19,7 +19,7 @@
 package com.zepben.ewbnetworkserver.data;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
 import com.zepben.ewbnetworkserver.patch.LoadOperation;
 import com.zepben.ewbnetworkserver.patch.LoadType;
 import com.zepben.ewbnetworkserver.patch.PatchLayer;

@@ -19,11 +19,11 @@
 package com.zepben.ewbnetworkserver;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.common.meta.MetadataCollection;
-import com.zepben.cimbend.customer.CustomerService;
-import com.zepben.cimbend.diagram.DiagramService;
-import com.zepben.cimbend.measurement.MeasurementService;
-import com.zepben.cimbend.network.NetworkService;
+import com.zepben.evolve.services.common.meta.MetadataCollection;
+import com.zepben.evolve.services.customer.CustomerService;
+import com.zepben.evolve.services.diagram.DiagramService;
+import com.zepben.evolve.services.measurement.MeasurementService;
+import com.zepben.evolve.services.network.NetworkService;
 
 @EverythingIsNonnullByDefault
 public class Services {

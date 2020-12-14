@@ -19,12 +19,12 @@
 package com.zepben.ewbnetworkserver.patch;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
-import com.zepben.cimbend.cim.iec61970.base.core.Equipment;
-import com.zepben.cimbend.cim.iec61970.base.core.Feeder;
-import com.zepben.cimbend.cim.iec61970.base.core.PhaseCode;
-import com.zepben.cimbend.network.tracing.PhaseStep;
-import com.zepben.cimbend.network.tracing.Tracing;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.Equipment;
+import com.zepben.evolve.cim.iec61970.base.core.Feeder;
+import com.zepben.evolve.cim.iec61970.base.core.PhaseCode;
+import com.zepben.evolve.services.network.tracing.Tracing;
+import com.zepben.evolve.services.network.tracing.phases.PhaseStep;
 
 import java.util.ArrayList;
 import java.util.Collection;

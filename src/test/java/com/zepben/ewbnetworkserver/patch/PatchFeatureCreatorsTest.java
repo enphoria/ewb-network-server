@@ -18,8 +18,8 @@
 
 package com.zepben.ewbnetworkserver.patch;
 
-import com.zepben.cimbend.cim.iec61970.base.core.PhaseCode;
-import com.zepben.cimbend.cim.iec61970.base.wires.PowerTransformer;
+import com.zepben.evolve.cim.iec61970.base.core.PhaseCode;
+import com.zepben.evolve.cim.iec61970.base.wires.PowerTransformer;
 import com.zepben.ewbnetworkserver.Services;
 import com.zepben.ewbnetworkserver.data.LoadDataJson;
 import com.zepben.ewbnetworkserver.data.ReplaceObjectsNetwork;

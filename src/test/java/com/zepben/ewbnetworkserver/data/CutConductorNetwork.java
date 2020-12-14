@@ -19,13 +19,13 @@
 package com.zepben.ewbnetworkserver.data;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
-import com.zepben.cimbend.cim.iec61970.base.core.*;
-import com.zepben.cimbend.cim.iec61970.base.wires.AcLineSegment;
-import com.zepben.cimbend.cim.iec61970.base.wires.EnergySource;
-import com.zepben.cimbend.cim.iec61970.base.wires.Junction;
-import com.zepben.cimbend.network.NetworkService;
-import com.zepben.cimbend.network.tracing.Tracing;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61970.base.core.*;
+import com.zepben.evolve.cim.iec61970.base.wires.AcLineSegment;
+import com.zepben.evolve.cim.iec61970.base.wires.EnergySource;
+import com.zepben.evolve.cim.iec61970.base.wires.Junction;
+import com.zepben.evolve.services.network.NetworkService;
+import com.zepben.evolve.services.network.tracing.Tracing;
 import com.zepben.ewbnetworkserver.Services;
 import com.zepben.ewbnetworkserver.patch.PatchLayer;
 import io.vertx.core.json.JsonObject;
@@ -84,9 +84,9 @@ public class CutConductorNetwork {
         AcLineSegment c2 = createAcLineSegment(network, "20000002", "c2", PhaseCode.BC, unknownWireInfo, locationOf(network, "20000002-loc", LNG_LAT_2_1, LNG_LAT_2_2));
         AcLineSegment c3 = createAcLineSegment(network, "20000003", "c3", PhaseCode.BC, unknownWireInfo, locationOf(network, "20000003-loc", LNG_LAT_3_1, LNG_LAT_3_2));
 
-        createTerminals(network, c1, 2);
+        createTerminals(network, c1, 2, PhaseCode.BC);
 
-        createFeeder(network, zone, "f001", "f001", n1);
+        createFeeder(network, zone, "f001", "f001", n1.getTerminal(2));
 
         connect(network, s0.getTerminal(1), n1.getTerminal(1), "cn1");
         connect(network, n1.getTerminal(2), c1.getTerminal(1), "cn2");
@@ -145,7 +145,7 @@ public class CutConductorNetwork {
         createTerminals(network, c12, 1, PhaseCode.ABC);
         c12.setPerLengthSequenceImpedance(unknownPerLengthSequenceImpedance);
 
-        createFeeder(network, zone, "f001", "f001", n1);
+        createFeeder(network, zone, "f001", "f001", n1.getTerminal(2));
 
         connect(network, s0.getTerminal(1), n1.getTerminal(1), "cn1");
         connect(network, n1.getTerminal(2), c11.getTerminal(1), "cn2");

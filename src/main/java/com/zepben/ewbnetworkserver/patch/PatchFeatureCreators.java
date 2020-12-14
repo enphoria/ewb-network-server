@@ -19,11 +19,11 @@
 package com.zepben.ewbnetworkserver.patch;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
-import com.zepben.cimbend.cim.iec61970.base.auxiliaryequipment.AuxiliaryEquipment;
-import com.zepben.cimbend.cim.iec61970.base.auxiliaryequipment.FaultIndicator;
-import com.zepben.cimbend.cim.iec61970.base.core.*;
-import com.zepben.cimbend.cim.iec61970.base.wires.*;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61970.base.auxiliaryequipment.AuxiliaryEquipment;
+import com.zepben.evolve.cim.iec61970.base.auxiliaryequipment.FaultIndicator;
+import com.zepben.evolve.cim.iec61970.base.core.*;
+import com.zepben.evolve.cim.iec61970.base.wires.*;
 import com.zepben.ewbnetworkserver.Services;
 import com.zepben.ewbnetworkserver.geojson.GeoJson;
 import com.zepben.vertxutils.json.JsonUtils;
@@ -32,7 +32,7 @@ import io.vertx.core.json.JsonObject;
 import javax.annotation.Nullable;
 import java.util.*;
 
-import static com.zepben.cimbend.common.extensions.IdentifiedObjectExtensionsKt.typeNameAndMRID;
+import static com.zepben.evolve.services.common.extensions.IdentifiedObjectExtensionsKt.typeNameAndMRID;
 import static com.zepben.ewbnetworkserver.ObjectCreators.createLocation;
 import static com.zepben.ewbnetworkserver.ObjectCreators.createTerminals;
 import static com.zepben.ewbnetworkserver.PatchProcessor.unknownPerLengthSequenceImpedance;

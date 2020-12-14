@@ -19,11 +19,11 @@
 package com.zepben.ewbnetworkserver;
 
 import com.zepben.annotations.EverythingIsNonnullByDefault;
-import com.zepben.cimbend.cim.iec61968.common.Location;
-import com.zepben.cimbend.cim.iec61968.common.PositionPoint;
-import com.zepben.cimbend.cim.iec61970.base.core.ConductingEquipment;
-import com.zepben.cimbend.cim.iec61970.base.core.PhaseCode;
-import com.zepben.cimbend.cim.iec61970.base.core.Terminal;
+import com.zepben.evolve.cim.iec61968.common.Location;
+import com.zepben.evolve.cim.iec61968.common.PositionPoint;
+import com.zepben.evolve.cim.iec61970.base.core.ConductingEquipment;
+import com.zepben.evolve.cim.iec61970.base.core.PhaseCode;
+import com.zepben.evolve.cim.iec61970.base.core.Terminal;
 
 import java.util.List;
 
