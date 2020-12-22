@@ -18,6 +18,7 @@
 
 package com.zepben.ewbnetworkserver
 
+import com.zepben.evolve.conn.grpc.ExceptionInterceptor
 import com.zepben.evolve.conn.grpc.GrpcServer
 import com.zepben.evolve.conn.grpc.SslContextConfig
 import io.grpc.BindableService
@@ -33,7 +34,7 @@ class EwbGrpcServer(
 ) : GrpcServer(
     port,
     if (!certPath.isBlank()) SslContextConfig(certPath, keyPath, trustPath, clientAuth) else null,
-    null
+    listOf(ExceptionInterceptor())
 ) {
     init {
         services.forEach { serverBuilder.addService(it) }

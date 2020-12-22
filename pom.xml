@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.zepben.maven</groupId>
         <artifactId>evolve-super-pom</artifactId>
-        <version>0.3.7</version>
+        <version>0.5.1</version>
     </parent>
 
     <groupId>com.zepben</groupId>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.zepben.evolve</groupId>
             <artifactId>evolve-conn</artifactId>
-            <version>0.2.0</version>
+            <version>0.3.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
