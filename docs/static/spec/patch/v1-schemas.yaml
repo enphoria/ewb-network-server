@@ -11,4 +11,4 @@ loadManipulation:
     mRID:
       type: string
     values:
-      $ref: '../v1-schemas.yaml#/doubleArray'
+      $ref: '../v1-patch-schemas.yaml#/doubleArray'

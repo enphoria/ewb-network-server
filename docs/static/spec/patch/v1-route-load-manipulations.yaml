@@ -9,7 +9,7 @@ get:
     If the values array for a particular manipulation has multiple values they should be considered readings from evenly spaced intervals across a standard 24 hour day.
   operationId: loadManipulations
   parameters:
-    - $ref: '../v1-parameters.yaml#/filterParam'
+    - $ref: '../v1-patch-parameters.yaml#/filterParam'
   responses:
     '200':
       $ref: 'v1-response-load-manipulations.yaml'
