@@ -13,7 +13,7 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.64",
     "@mdx-js/react": "1.6.22",
-    "@zepben/docusaurus-components": "0.2.2",
+    "@zepben/docusaurus-components": "0.2.3",
     "@zepben/docusaurus-preset": "0.4.1",
     "clsx": "1.1.1",
     "lodash": "4.17.20",
