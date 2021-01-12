@@ -5,8 +5,6 @@ title: Network API
 hide_title: true
 hide_table_of_contents: true
 ---
+import ApiDoc from "@zepben/docusaurus-components/components/ApiDoc";
 
-import SwaggerUI from "swagger-ui-react";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-
-<SwaggerUI url={useBaseUrl("/spec/network/spec.yaml")} defaultModelExpandDepth={2}/>
+<ApiDoc specUrl={"network/spec.yaml"} documentUrl={"/api/network"} />

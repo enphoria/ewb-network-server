@@ -6,7 +6,6 @@ hide_title: true
 hide_table_of_contents: true
 ---
 
-import SwaggerUI from "swagger-ui-react";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import ApiDoc from "@zepben/docusaurus-components/components/ApiDoc";
 
-<SwaggerUI url={useBaseUrl("/spec/network/geo-view/spec.yaml")} defaultModelExpandDepth={2}/>
+<ApiDoc specUrl={"network/geo-view/spec.yaml"} documentUrl={"/api/geo-view"} />

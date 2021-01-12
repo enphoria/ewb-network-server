@@ -11,14 +11,15 @@
     "serve": "docusaurus serve"
   },
   "dependencies": {
-    "@zepben/docusaurus-preset": "0.3.4",
-    "@zepben/docusaurus-components": "0.1.1",
-    "@mdx-js/react": "1.5.8",
+    "@docusaurus/core": "2.0.0-alpha.64",
+    "@mdx-js/react": "1.6.22",
+    "@zepben/docusaurus-components": "0.2.1",
+    "@zepben/docusaurus-preset": "0.4.1",
     "clsx": "1.1.1",
+    "lodash": "4.17.20",
     "react": "16.8.4",
     "react-dom": "16.8.4",
-    "react-icons": "3.11.0",
-    "swagger-ui-react": "^3.35.2"
+    "react-icons": "3.11.0"
   },
   "browserslist": {
     "production": [
@@ -35,11 +36,11 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-alpha.64",
     "@tsconfig/docusaurus": "1.0.2",
+    "@types/lodash": "4.14.167",
     "@types/react": "16.9.49",
     "@types/react-helmet": "6.1.0",
     "@types/react-router-dom": "5.1.5",
     "prettier": "2.1.2",
-    "typescript": "4.0.3",
-    "@types/swagger-ui-react": "^3.23.3"
+    "typescript": "4.0.3"
   }
 }

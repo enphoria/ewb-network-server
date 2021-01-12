@@ -13,6 +13,7 @@ import Layout from "@theme/Layout";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 import groupBy from "lodash/groupBy";
+import Link from '@docusaurus/Link';
 
 type Item = {
     title: string;
@@ -31,7 +32,6 @@ const Ui: FunctionComponent<Props> = ({title, description, items}) => {
     const groupedByType = groupBy(items, (i) => i.type);
 
     return (
-        <Layout title={title} description={description}>
             <main className="container margin-vert--lg">
                 {Object.entries(groupedByType).map(
                     ([type, items]: [string, Item[]]) => {
@@ -42,7 +42,7 @@ const Ui: FunctionComponent<Props> = ({title, description, items}) => {
                                 </div>
                                 <div className="row">
                                     {items.map((t) => (
-                                        <div key={t.title} className="col col--4 margin-bottom--lg">
+                                        <div key={t.title} className="col col--6 margin-bottom--lg">
                                             <div className={clsx("card", styles.showcaseItem)}>
                                                 <div className="card__body">
                                                     <div className="avatar">
@@ -57,15 +57,7 @@ const Ui: FunctionComponent<Props> = ({title, description, items}) => {
                                                 {
                                                     <div className="card__footer">
                                                         <div className="button-group button-group--block">
-                                                            {t.siteRelUrl && (
-                                                                <a
-                                                                    className="button button--small button--secondary button--block"
-                                                                    href={t.siteRelUrl}
-                                                                    target="_blank"
-                                                                    rel="noreferrer noopener"
-                                                                >
-                                                                    Documentation
-                                                                </a>)}
+                                                            <Link to={t.siteRelUrl}>Documentation</Link>
                                                         </div>
                                                     </div>
                                                 }
@@ -78,7 +70,6 @@ const Ui: FunctionComponent<Props> = ({title, description, items}) => {
                     }
                 )}
             </main>
-        </Layout>
     );
 };
 

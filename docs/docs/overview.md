@@ -1,3 +1,9 @@
+---
+id: overview
+title: Overview
+slug: /
+---
+
 The EWB Network Server provides API access for operating on an EWB Network.
 
 This document describes how to configure and run the EWB Network Server

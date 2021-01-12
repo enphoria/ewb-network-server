@@ -5,8 +5,6 @@ title: Trace API
 hide_title: true
 hide_table_of_contents: true
 ---
+import ApiDoc from "@zepben/docusaurus-components/components/ApiDoc";
 
-import SwaggerUI from "swagger-ui-react";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-
-<SwaggerUI url={useBaseUrl("/spec/network/trace/spec.yaml")} defaultModelExpandDepth={2}/>
+<ApiDoc specUrl={"network/trace/spec.yaml"} documentUrl={"/api/trace"} />
